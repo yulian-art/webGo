@@ -2,36 +2,43 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"html/template"
+	"net/http"
 )
-type User struct{
-	Name string
+
+type User struct {
+	Name   string
 	gender string
-	Age int
+	Age    int
 }
 
-func sayHello(w http.ResponseWriter, r *http.Request){
-	t, err:=template.ParseFiles("./hello.tmpl")
+func sayHello(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("./hello.tmpl")
 	if err != nil {
 		fmt.Println("parse failed :%v", err)
 
 	}
 	u1 := User{
-		Name: "yyy",
+		Name:   "yyy",
 		gender: "woman",
-		Age: 19,
+		Age:    19,
 	}
-	t.Execute(w, u1)
+	m1 := map[string]any{
+		"name": "lyc",
+		"age":  1333,
+	}
+	t.Execute(w, map[string]any{
+		"u1": u1,
+		"m1": m1,
+	})
 }
 
 func main() {
 	http.HandleFunc("/", sayHello)
-	err:=http.ListenAndServe(":9000", nil)
+	err := http.ListenAndServe(":9000", nil)
 	if err != nil {
 		fmt.Println("listen and server err :%v", err)
 		return
 	}
-
 
 }

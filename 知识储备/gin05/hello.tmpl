@@ -4,8 +4,26 @@
     <title>Hello</title>
 </head>
 <body>
-    <p>Hello {{ .Name }}</p>
-    <p> age {{.Age}}</p>
+    <p>Hello {{ .m1.name }}</p>
+    <p> age {{.m1.age}}</p>
+    <p>Hello {{ .u1.Name }}</p>
+    <p> age {{.u1.Age}}</p>
+
+    <hr>
+    {{$v1 := 100}}
+    {{$age := .m1.age}}
+
+    <hr>
+    {{ if $v1 }}
+    {{ $v1 }}
+    {{ else }}
+    nothing
+    {{end}}
+    {{if lt .m1.age 18}}
+    good good study
+    {{else}}
+    yes
+    {{end}}
 </body>
 
 </html>
