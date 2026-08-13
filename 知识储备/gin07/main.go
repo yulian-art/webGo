@@ -9,20 +9,26 @@ import (
 func hello(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("./hello.tmpl")
 	if err != nil {
-		fmt.Println("hello failed")
+		fmt.Println("hello parse failed:", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	t.Execute(w, "111")
+	if err := t.Execute(w, "111"); err != nil {
+		fmt.Println("hello execute failed:", err)
+	}
 
 }
 
 func world(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("./world.tmpl")
 	if err != nil {
-		fmt.Println("world failed")
+		fmt.Println("world parse failed:", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	t.Execute(w, "11122")
+	if err := t.Execute(w, "11122"); err != nil {
+		fmt.Println("world execute failed:", err)
+	}
 
 }
 func main() {
