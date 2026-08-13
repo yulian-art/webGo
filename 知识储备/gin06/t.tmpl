@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>Hello</title>
+</head>
+<body>
+    <h1>testing embeding template language</h1>
+    <hr>
+    {{template "ul.tmpl"}}
+    <hr>
+    {{template "ol.tmpl"}}
+    <div>{{ . }}</div>
+</body>
+
+</html>
+
+{{ define "ol.tmpl" }}
+    <ol>
+        <li>eating </li>
+        <li>sleeping </li>
+    </ol>
+{{end}}
