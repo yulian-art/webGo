@@ -11,6 +11,17 @@ func main() {
 			"name": name,
 		})
 	})
-
+	r.LoadHTMLFiles("./login.html", "./index.html")
+	r.GET("/login", func(c *gin.Context){
+		c.HTML(200, "login.html", nil)
+	})
+	r.POST("/login", func(c *gin.Context){
+		us := c.PostForm("username")
+		pw := c.PostForm("password")
+		c.HTML(200, "index.html", gin.H{
+			"name" : us,
+			"pass" : pw,
+		})
+	})
 	r.Run(":9000")
 }
