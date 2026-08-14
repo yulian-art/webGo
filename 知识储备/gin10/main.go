@@ -25,7 +25,7 @@ func main() {
 	})
 
 	type msg struct {
-		Name  string
+		Name  string `json:"name"`
 		Age   int
 		Hobby string
 	}
