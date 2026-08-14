@@ -9,6 +9,7 @@ import (
 
 func main() {
 	r := gin.Default()
+	r.Static("/xxx", "./statics")
 	r.SetFuncMap(template.FuncMap{
 		"safe": func(str string) template.HTML{
 			return template.HTML(str)
