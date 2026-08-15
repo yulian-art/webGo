@@ -72,6 +72,33 @@ func queryMultiRowDemo(){
 	}
 }
 
+func insertRowDemo(){
+	sqlStr :="insert into user(name, age) values (?,?)"
+	ret, err := db.Exec(sqlStr, "yulian",19)
+	if err != nil {
+		fmt.Printf("exec failed %v\n", err)
+		return
+	}
+	theID, err := ret.LastInsertId()
+	if err != nil {
+		fmt.Printf("last id failed, err %v\n", err)
+	
+		return
+	}
+	fmt.Println(theID)
+}
+func updateRowDemo(){
+	sqlStr := "update user set age=? where id=?"
+	ret, err := db.Exec(sqlStr, 2000,1)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	n,_:=ret.RowsAffected()
+	fmt.Println(n)
+}
+
 func main(){
 	if err := initMySQL(); err != nil{
 		fmt.Printf("connect to db failed , err : %v \n", err)
@@ -79,5 +106,6 @@ func main(){
 	defer db.Close()
 	queryRowDemo()
 	queryMultiRowDemo()
-
+	insertRowDemo()
+	updateRowDemo()
 }
