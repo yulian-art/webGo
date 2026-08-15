@@ -52,11 +52,32 @@ func queryRowDemo(){
 
 }
 
+func queryMultiRowDemo(){
+	sqlStr := "select id, name, age from user where id>?"
+	rows, err := db.Query(sqlStr, 0)
+	if err != nil {
+		fmt.Printf("query failed , err %v \n", err)
+		return
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		var u User
+		err := rows.Scan(&u.id, &u.name, &u.age)
+		if err != nil {
+			fmt.Printf("scan failed ,err: %v\n", err)
+			return
+		}
+		fmt.Printf("id : %d, name: %s, age : %d", u.id, u.name, u.age)
+	}
+}
+
 func main(){
 	if err := initMySQL(); err != nil{
 		fmt.Printf("connect to db failed , err : %v \n", err)
 	}
 	defer db.Close()
 	queryRowDemo()
+	queryMultiRowDemo()
 
 }
