@@ -10,13 +10,58 @@
 | `practice` | 10 个示例目录，每个目录只有 `docs.md` | 只阅读文档或布置练习 |
 | `answer` | 完整 `agent` 源码与文档，不含 `.env` 和 Milvus 数据卷 | 对照答案、运行示例 |
 
-开始练习时建议使用 `practice`；需要运行代码或查看实现时切换到 `answer`：
+克隆仓库后按当前目标选择分支：
 
 ```powershell
 git clone https://github.com/yulian-art/webGo.git
 cd webGo
-git switch answer
+git switch practice   # 阅读题目、自己实现
+# 或
+git switch answer     # 运行和对照完整实现
 ```
+
+## 练习版使用说明（`practice`）
+
+`practice` 是文档练习版。`agent/eino` 下保留 10 个示例目录，每个目录只有一份修正后的 `docs.md`，没有 Go 源码、依赖文件或运行数据。因此它适合按题目从零实现，不是开箱即用的可运行分支。
+
+推荐流程：
+
+1. 切换到 `practice`，按 `00` 到 `09` 的顺序阅读每个目录的 `docs.md`。
+2. 在自己的练习分支上补充 `main.go`、`go.mod` 和所需依赖；不要直接修改发布的 `practice` 分支。
+3. 先完成当前示例，再进入下一个示例。`07`、`08` 需要额外准备 Milvus，见下方 Milvus 说明。
+4. 需要查看答案时，先提交自己的改动或执行 `git stash`，再切换到 `answer`。
+
+可以用下面的方式保留自己的练习：
+
+```powershell
+git switch practice
+git switch -c my-practice
+# 在 my-practice 中编写代码并运行
+git add agent/eino
+git commit -m "feat: complete Eino practice"
+```
+
+练习分支没有 `env.example`，请在本地自行设置环境变量，不要提交真实密钥。
+
+## 答案版使用说明（`answer`）
+
+`answer` 保留完整的 `agent` 源码和修正后的文档，但主动排除了 `.env` 与 Milvus `volumes` 数据。它用于运行示例、阅读实现和与自己的练习对照。
+
+```powershell
+git switch answer
+cd agent/eino
+go mod download
+cd 00eino_init_example
+go run .
+```
+
+每个示例都可以在自己的目录执行 `go run .`。部分示例包含独立的 `go.mod`，请在对应目录执行命令，不要把多个示例合并到同一个模块中。对照自己的实现时，可使用：
+
+```powershell
+git diff my-practice..answer -- agent
+```
+
+答案中的代码仍可能依赖外部模型服务或 Milvus；运行前请完成环境变量和服务配置。答案分支适合参考实现，不建议直接把其中的密钥、运行数据或临时配置复制回仓库。
 
 ## 环境准备
 
