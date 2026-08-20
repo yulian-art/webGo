@@ -18,7 +18,12 @@ chatTemplate和chatModel是交互密切的两个组件，用来把一个变量�
 2. 准备消息
  上次是直接声明一个schema.Message指针数组，然后传入generate
  缺点是：每次都是写死的，但是实际业务场景是根据输入变化的
- 所以这次用模板曾姐灵活性
+ 所以这次用模板增加灵活性
+3. ... 
 ```
 
 history要求必须是会话历史的格式：[]*schema.Message
+
+后期提示：在编排场景下通常把ChatTemplate作为ChatModel的前置节点
+
+我们通常在调用大模型之前把上下文准备好
