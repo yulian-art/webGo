@@ -20,7 +20,9 @@ Loader ----> transformer（拆分数据） ----> embedding ----> indexer (存储
 
 ```
 遇事不决写注释
-
+1. 初始化loader
+2. 加载文档
+3. 打印验证
 ```
 
 注意`go mod tidy`后自动下载0.6版本的eino，需要go get一下下载最新版本
