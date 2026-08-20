@@ -5,6 +5,7 @@
 demo用Milvus原生支持，用docker启动
 
 ```
+0. 初始和创建emberrer
 1. 创建索引器
 2. 索英文当
 ```
@@ -64,3 +65,7 @@ docker run -d --name attu -p 3000:3000 -v attu-data:/data zilliz/attu:v3.0.0-bet
 ```
 
 肥肠方便啊
+
+然后在写代码的时候发现官方文档的代码例子是错的。。。
+
+这里注意attu连接milvus的时候**不要填** `localhost:19530` 或 `127.0.0.1:19530`，因为 Attu 前端在浏览器里跑，浏览器会把 `localhost` 解析成它自己，而不是你的电脑
