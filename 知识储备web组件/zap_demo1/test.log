@@ -1,0 +1,5 @@
+{"level":"info","ts":1789213082.4177814,"msg":"success....","url":"http://www.google.com","code":200}
+1.7892133410817916e+09	info	success....	{"url": "http://www.google.com", "code": 200}
+2026-09-12T19:48:01.020+0800	info	success....	{"url": "http://www.google.com", "code": 200}
+2026-09-12T19:50:09.850+0800	info	zap_demo1/main.go:67	success....	{"url": "http://www.google.com", "code": 200}
+2026-09-12T19:58:23.176+0800	info	zap_demo1/main.go:79	success....	{"url": "http://www.google.com", "code": 200}
